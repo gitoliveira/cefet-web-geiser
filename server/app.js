@@ -8,13 +8,17 @@ var db = {
 
 
 // configurar qual templating engine usar. Sugestão: hbs (handlebars)
-//app.set('view engine', '???');
+app.set('view engine', 'hbs');
+app.set('views', 'server/views');
 
 
 // definir rota para página inicial --> renderizar a view index, usando os
 // dados do banco de dados "data/jogadores.json" com a lista de jogadores
 // dica: o handler desta função é bem simples - basta passar para o template
 //       os dados do arquivo data/jogadores.json
+app.get('/', function(req,res){
+    res.render('server/views/index.hbs', {name:'index'});
+});
 
 // definir rota para página de detalhes de um jogador --> renderizar a view
 // jogador, usando os dados do banco de dados "data/jogadores.json" e
@@ -24,6 +28,8 @@ var db = {
 
 // configurar para servir os arquivos estáticos da pasta "client"
 // dica: 1 linha de código
+app.use(express.static('client'));
 
 // abrir servidor
 // dica: 1-3 linhas de código
+app.listen(1025);
